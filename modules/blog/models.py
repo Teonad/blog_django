@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -44,6 +45,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('articles_detail', kwargs={'slug': self.slug})
 
 
 
