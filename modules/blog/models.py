@@ -49,6 +49,14 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('articles_detail', kwargs={'slug': self.slug})
 
+    def save(self, *args, **kwargs):
+        """
+        Сохранение полей модели при их отсутствии заполнения
+        """
+        if not self.slug:
+            self.slug = unique_slugify(self, self.title)
+        super().save(*args, **kwargs)
+
 
 
 class Category(MPTTModel):
@@ -87,3 +95,6 @@ class Category(MPTTModel):
         Возвращение заголовка статьи
         """
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('articles_by_category', kwargs={'slug': self.slug})
