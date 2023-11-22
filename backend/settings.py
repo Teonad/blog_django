@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'modules.blog.apps.BlogConfig',
+    'modules.system.apps.SystemConfig',
     'modules.services',
     'mptt',
     'debug_toolbar',
